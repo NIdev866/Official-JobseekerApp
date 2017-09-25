@@ -4,7 +4,9 @@ import axios from 'axios';
 import { 
   COMPANIES,
   ALL_CAMPAIGNS,
-  ADD_DURATION_TO_COMPANIES
+  ADD_DURATION_TO_COMPANIES,
+  ERROR_FOR_MODAL,
+  SUCCESS_FOR_MODAL
 } from './types.js';
 
 
@@ -43,5 +45,17 @@ export function addDurationToCompanies(companiesWithDurations){
   return { 
     type: ADD_DURATION_TO_COMPANIES, 
     payload: companiesWithDurations
+  }
+}
+
+export function errorForModal(){
+  return {
+    type: ERROR_FOR_MODAL,
+  }
+}
+
+export function successForModal(){
+  return {
+    type: SUCCESS_FOR_MODAL,
   }
 }

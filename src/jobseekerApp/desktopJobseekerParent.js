@@ -14,7 +14,6 @@ import TopCounter from "./topCounter"
 import Animation from 'react-addons-css-transition-group'
 import { config } from "dotenv"
 import DesktopJobCards from "./desktopJobCards"
-import MapPageWrapper from "./forms/mapPageWrapper"
 import { connect } from 'react-redux'
 import { fetchCompanies, addDurationToCompanies } from '../actions'
 import { Marker, GoogleMap, DirectionsRenderer } from "react-google-maps"
@@ -24,17 +23,6 @@ import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-au
 
 config()
 const google = window.google
-
-
-
-
-
-
-
-
-
-
-
 
 
 class JobseekerParent extends Component {
@@ -105,14 +93,6 @@ class JobseekerParent extends Component {
   componentWillMount(){
     this.props.fetchCompanies()
   }
-
-
-
-
-
-
-
-
 
   autocompleteOnChange(address){
     this.setState({ address })
@@ -203,18 +183,8 @@ class JobseekerParent extends Component {
   }
 
 
-
-
-
-
-
-
   createDurations(){
     let allCompaniesWithDurations = this.props.companies.map((company)=>{
-
-
-
-
 
       let DurationService = new google.maps.DistanceMatrixService();
       DurationService.getDistanceMatrix({
@@ -248,14 +218,6 @@ class JobseekerParent extends Component {
     }
   }
 
-
-
-
-
-
-
-
-
   render() {
     const footerStyle = {
       textAlign: "center",
@@ -271,11 +233,6 @@ class JobseekerParent extends Component {
       zIndex: "8000",
       overflow: "hidden"
     }
-
-
-
-
-
     const styleObj = {
       input: { padding: "6px", width: "280px"},
       autocompleteContainer: { 
@@ -295,12 +252,6 @@ class JobseekerParent extends Component {
       placeholder: 'Your rough location to see distance (Optional)',
       autoFocus: true,
     }
-
-
-
-
-
-
     const { onSubmit } = this.props
     const { page } = this.state
     return (
@@ -308,13 +259,6 @@ class JobseekerParent extends Component {
             {page === 1 && 
               <div>
                 <div style={{float: "left", width: "60%", position: "fixed", height: "100vh"}}>
-                  
-
-
-
-
-
-
                 {this.props.companies &&
                   <DesktopMapComponent 
                     zoom={10}
@@ -326,9 +270,7 @@ class JobseekerParent extends Component {
                     routes={this.state.routes}
                   />
                 }
-
                 </div>
-
                 <div style={inputStyling}>
                   <PlacesAutocomplete 
                     onSelect={this.handleSelect}
@@ -354,26 +296,6 @@ class JobseekerParent extends Component {
                 </div>
               </div>
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             {page > 1 && 
               <TopCounter 
                 finishedStep={this.state.page}
@@ -392,7 +314,7 @@ class JobseekerParent extends Component {
                 transitionAppear={true}
                 transitionAppearTimeout={500}
               >
-                {page === 2 &&
+                {page === 2222 &&
                   <FormFirstPage 
                     previousPage={this.previousPage}
                     onSubmit={this.nextPage} 
@@ -413,11 +335,9 @@ class JobseekerParent extends Component {
                     onSubmit={this.nextPage}
                   />}
                 {page === 6 &&
-                  <MapPageWrapper 
+                  <FormFifthPage 
                     previousPage={this.previousPage}
                     onSubmit={this.nextPage}
-                    userMarker={this.state.userMarker}
-                    updateUserMarker={this.updateUserMarker}
                   />}
                 {page === 7 &&
                   <FormSixthPage 
@@ -429,7 +349,7 @@ class JobseekerParent extends Component {
                     previousPage={this.previousPage}
                     onSubmit={this.nextPage}
                   />}
-                {page === 9 &&
+                {page === 2 &&
                   <FormEithPage 
                     previousPage={this.previousPage}
                     onSubmit={onSubmit}

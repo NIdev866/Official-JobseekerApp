@@ -1,5 +1,5 @@
 import React, { Component} from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, hasSubmitFailed } from 'redux-form'
 import validate from './validate'
 import RaisedButton from 'material-ui/RaisedButton'
 import styles from './form_material_styles'
@@ -9,6 +9,16 @@ import submit from "./submit"
 import { Checkbox } from "material-ui"
 import DropboxChooser from "react-dropbox-chooser"
 import GooglePicker from "react-google-picker"
+
+
+
+
+
+import RemoteSubmitButton from './RemoteSubmitButton'
+import { connect } from 'react-redux'
+
+
+
 
 
 class Later extends Component{
@@ -105,8 +115,16 @@ class Dropbox extends Component{
   }
 }
 
-class FormFirstPage extends Component{
+class FormLastPage extends Component{
  render(){
+
+
+
+  console.log(this.props.submitFailed)
+
+
+
+
   const { handleSubmit, previousPage } = this.props
     return (
       <form onSubmit={handleSubmit}>
@@ -140,17 +158,30 @@ class FormFirstPage extends Component{
             onClick={previousPage}
             style={styles.raisedButtonStyle}
           />
-          <RaisedButton
+          {/*<RaisedButton
             type="submit"
             label="Submit"
             primary={true}
             style={styles.raisedButtonStyle}
-          />
+          />*/}
+          <RemoteSubmitButton />
         </Row>
       </form>
     )
   }
 }
+
+
+
+
+
+FormLastPage = connect(
+  state => ({
+    submitFailed: hasSubmitFailed('wizard')(state)
+  })
+)(FormLastPage)
+
+
 
 export default reduxForm({
   form: 'wizard', // <------ same form name
@@ -158,4 +189,4 @@ export default reduxForm({
   forceUnregisterOnUnmount: true, // <------ unregister fields on unmount
   onSubmit: submit,
   validate
-})(FormFirstPage)
+})(FormLastPage)

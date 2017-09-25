@@ -26,15 +26,26 @@ const store = createStore(reducers, composeEnhancers(
     applyMiddleware(reduxThunk, promise)
   ));
 
+class Dupa extends React.Component{
+  render(){
+    return(
+      <div>HELLOOOOOO</div>
+    )
+  }
+}
+
 ReactDOM.render(
   <Provider store={store}>
     <MuiThemeProvider>
       <BrowserRouter>
         <div>
-          <Route path="/" component={
-            deviceDetect.device == "Windows" || 
-            deviceDetect.device == "Macintosh" ||
-            deviceDetect.device == "Linux" ? DesktopJobseekerParent : MobileJobseekerParent} />
+          <Switch>
+            <Route exact path="/" component={
+              deviceDetect.device == "Windows" || 
+              deviceDetect.device == "Macintosh" ||
+              deviceDetect.device == "Linux" ? DesktopJobseekerParent : MobileJobseekerParent} />
+            <Route path='/hue' component={Dupa} />
+          </Switch>
         </div>
       </BrowserRouter>
     </MuiThemeProvider>

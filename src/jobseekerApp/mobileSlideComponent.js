@@ -13,7 +13,6 @@ import styles from './forms/form_material_styles'
 import TopCounter from "./topCounter"
 import Animation from 'react-addons-css-transition-group'
 import { config } from "dotenv"
-import MapPageWrapper from "./forms/mapPageWrapper"
 
 
 

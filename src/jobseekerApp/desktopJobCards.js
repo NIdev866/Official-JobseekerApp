@@ -68,6 +68,18 @@ CheckboxComponent = connect(
   }
 )(CheckboxComponent)
 
+
+
+
+
+
+
+
+
+
+
+
+
 class CardExampleExpandable extends Component{
   constructor(props){
     super(props)
@@ -86,18 +98,10 @@ class CardExampleExpandable extends Component{
       this.setState({boxesTicked: this.state.boxesTicked-1})
     }
   }
-
-
-
-
   currentCompanyNameFromcompany_id(company_id){
-
     //console.log({currentCompanyNameFromcompany_id: this.props.companies.filter(el=>el.company_id === company_id)[0].company_name})
-
     return this.props.companies.filter(el=>el.company_id === company_id)[0].company_name
   }
-
-
   currentCampaignSalaryType(salary_type, salary){
     switch(salary_type){
       case "PER_ANNUM":
@@ -112,8 +116,6 @@ class CardExampleExpandable extends Component{
         return "error in salary_type OR salary"
     }
   }
-
-
   componentWillMount(){
     this.props.fetchCompanies()
     this.props.fetchAllCampaigns()
@@ -126,40 +128,29 @@ class CardExampleExpandable extends Component{
     const cardStyle = {
       marginTop: "20px",
     }
-
-
-
     let correctCompanyStateForMapping = []
-
     if(this.props.companiesWithDurations){
       correctCompanyStateForMapping = this.props.companiesWithDurations
     }
     else{
       correctCompanyStateForMapping = this.props.companies
     }
-
-
     return(
       <div>
         {this.props.allCampaigns && correctCompanyStateForMapping && this.props.allCampaigns.map((campaign) => {
+
           return(
             <div>
             <div style={tickButtonStyle}>
               <FieldArray 
-                name="jobsSelected" 
+                name="jobs_selected" 
                 component={CheckboxComponent}
-                jobSelected={campaign.id}
+                jobSelected={{campaign_id: campaign.campaign_id, company_id: campaign.company_id, position_id: campaign.job_id}}
                 countBoxesTicked={this.countBoxesTicked}
                 boxesTicked={this.state.boxesTicked}
               />
             </div>
             <Card style={cardStyle}>
-
-
-
-
-
-
               <CardHeader
                 style={{height: "160px", textAlign: "left"}}
                 actAsExpander={true}
@@ -175,12 +166,6 @@ class CardExampleExpandable extends Component{
               
                 <p style={{fontSize: "15px", margin: "-10px", marginTop: "26px", padding: "0", color: "grey"}}>Distance: {this.props.companiesWithDurations ? this.props.companiesWithDurations.filter(el=>el.company_id === campaign.company_id)[0].duration + " away" : "  ___________"}</p>
               </CardHeader>
-
-
-
-
-
-
               <CardText expandable={true} style={{paddingBottom: "1px", paddingTop: "1px"}}>
               <div style={{borderTop: "1px solid #DCDCDC", paddingTop: "10px"}}>
                 <div style={{maxWidth: "500px", margin: "0 auto", textAlign: "left"}}>
@@ -196,7 +181,6 @@ class CardExampleExpandable extends Component{
     )
   }
 }
-
 
 function mapStateToProps(state) {
   return {
