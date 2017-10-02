@@ -103,7 +103,7 @@ class Dropbox extends Component{
       <div style={{marginTop: "40px"}}>
         <DropboxChooser 
           appKey={'7mx41a7h4zq8uvs'}
-          success={files => onChange(files[0].name)}
+          success={files => onChange(files[0].link)}
           multiselect={false}
           extensions={['.pdf', '.doc', '.docx', 
         '.rtf', '.wps', '.odt', '.wpd', '.txt', 
@@ -142,6 +142,20 @@ class FormLastPage extends Component{
               component={GoogleDrive}
               label="CV"
             />
+
+
+
+
+            <Field
+              name="CV"
+              type="text"
+              component={Dropzone}
+              label="CV"
+            />
+
+
+
+
             <Field
               name="CV"
               type="text"

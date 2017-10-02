@@ -35,12 +35,19 @@ import { Route, Redirect } from 'react-router'
 
 function submit(values){
 
+      delete values.emailCopy
+      //database.applicants.push(values) //not working (security issue). backend needed.
+      document.write(`You submitted:\n\n${JSON.stringify(values, null, 2)}`)
+      //this.props.submitJobseekerApplication(values)
+
+
+
 	axios.post(`http://localhost:3000/jobseeker/signup`, values)
 		.then(response => {
-          window.location.replace("/submittionSuccess");
+          //window.location.replace("/submittionSuccess");
 	      })
 	    .catch((err)=>{
-        window.location.replace("/submittionFailure");
+        //window.location.replace("/submittionFailure");
 	    })
 
 
